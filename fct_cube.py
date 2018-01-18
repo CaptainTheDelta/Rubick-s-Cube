@@ -186,8 +186,6 @@ couleurs = ['O','B','R','G','Y','W']
 
 def afficherCube():
     """Affiche le cube."""
-    clear()
-
     lines = [[' '] * 8 + [couleurs[c] for c in l] for l in cube[4]]
     lines.append([''])
 
