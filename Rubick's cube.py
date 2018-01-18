@@ -20,3 +20,4 @@ def formatCube(cube):
     Return:
         (list): Cube étalé.
     """
+    pass
