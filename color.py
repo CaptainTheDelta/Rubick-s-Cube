@@ -1,7 +1,5 @@
-"""
-Author: CaptainTheDelta
-Creation: 23-05-17
-"""
+# coding: utf-8
+
 # ---------------------------------- Import -----------------------------------
 
 import sys
