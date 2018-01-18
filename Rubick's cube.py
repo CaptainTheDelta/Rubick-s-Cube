@@ -107,5 +107,76 @@ def S2():
 
 # Rotation des faces
 
-print(cube)
-input()
+def R():
+    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], 1, axis=0)
+    cube[3] = np.rot90(cube[3],-1)
+
+
+def Rp():
+    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], -1, axis=0)
+    cube[3] = np.rot90(cube[3])
+
+def R2():
+    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], 2, axis=0)
+    cube[3] = np.rot90(cube[3],2)
+
+
+def L():
+    cube[[0,4,2,5],:,0] = np.roll(cube[[0,4,2,5],:,0], -1, axis=0)
+    cube[1] = np.rot90(cube[1],-1)
+
+def Lp():
+    cube[[0,4,2,5],:,0] = np.roll(cube[[0,4,2,5],:,0], 1, axis=0)
+    cube[1] = np.rot90(cube[1])
+
+def L2():
+    cube[[0,4,2,5],:,0] = np.roll(cube[[0,4,2,5],:,0], 2, axis=0)
+    cube[1] = np.rot90(cube[1],2)
+
+
+def U():
+    cube[:4,0] = np.roll(cube[:4,0], -1, axis=0)
+    cube[4] = np.rot90(cube[4],-1)
+
+def Up():
+    cube[:4,0] = np.roll(cube[:4,0], 1, axis=0)
+    cube[4] = np.rot90(cube[4])
+
+def U2():
+    cube[:4,0] = np.roll(cube[:4,0], 2, axis=0)
+    cube[4] = np.rot90(cube[4],2)
+
+
+def D():
+    cube[:4,2] = np.roll(cube[:4,2], 1, axis=0)
+    cube[4] = np.rot90(cube[4],-1)
+
+def Dp():
+    cube[:4,2] = np.roll(cube[:4,2], -1, axis=0)
+    cube[4] = np.rot90(cube[4])
+
+def D2():
+    cube[:4,2] = np.roll(cube[:4,2], 2, axis=0)
+    cube[4] = np.rot90(cube[4],2)
+
+
+def F():
+    y();L();yp()
+
+def Fp():
+    y();Lp();yp()
+
+def F2():
+    y();L2();yp()
+
+
+def B():
+    y();R();yp()
+
+def Bp():
+    y();Rp();yp()
+
+def B2():
+    y();R2();yp()
+
+
