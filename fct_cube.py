@@ -3,12 +3,12 @@
 # Pour l'ensemble des notations, se reporter aux images jointes.
 
 
-# ---------------------------------- Import -----------------------------------
+#----------------------------------- Import -----------------------------------
 
-from color import *
 import numpy as np
+import os
 
-# ----------------------------------- Cube ------------------------------------
+#------------------------------------ Cube ------------------------------------
 
 # Vue déplié du cube :
 
@@ -21,7 +21,7 @@ face = lambda c: np.array([c] * 9,int).reshape((3,3))
 cube = np.array([face(c) for c in range(6)], int)
 
 
-# -------------------------------- Mouvements ---------------------------------
+#--------------------------------- Mouvements ---------------------------------
 
 # Rotations du cube
 
@@ -180,3 +180,28 @@ def B2():
     y();R2();yp()
 
 
+#--------------------------------- Affichage ----------------------------------
+clear = lambda: os.system("cls") 
+couleurs = ['O','B','R','G','Y','W']
+
+def afficherCube():
+    """Affiche le cube."""
+    clear()
+
+    lines = [[' '] * 8 + [couleurs[c] for c in l] for l in cube[4]]
+    lines.append([''])
+
+    for i in range(3):
+        c = [couleurs[c] for c in cube[:4,i].ravel()]
+        c.insert(-3,' ')
+        c.insert(6,' ')
+        c.insert(3,' ')
+        lines.append(c)
+
+    lines.append([''])
+    lines += [[' '] * 8 + [couleurs[c] for c in l] for l in cube[5]]
+    
+    for l in lines:
+        for c in l:
+            print(' '+c,end ='')
+        print()
