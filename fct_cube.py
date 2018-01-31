@@ -6,6 +6,7 @@
 #----------------------------------- Import -----------------------------------
 
 import numpy as np
+from copy import deepcopy
 import os
 
 #------------------------------------ Cube ------------------------------------
@@ -27,6 +28,15 @@ def init_cube():
     face = lambda c: np.array([c] * 9,int).reshape((3,3))
 
     return np.array([face(c) for c in range(6)], int)
+
+def copy_cube():
+    """Renvoie un instané du cube.
+
+    Return:
+        (np.array): Cube.
+    """
+    return deepcopy(cube)
+
 
 cube = init_cube()
 
