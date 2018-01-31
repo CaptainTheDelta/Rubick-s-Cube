@@ -182,22 +182,22 @@ def B2():
 
 #--------------------------------- Affichage ----------------------------------
 clear = lambda: os.system("cls") 
-couleurs = ['O','B','R','G','Y','W']
+colors = ['O','B','R','G','Y','W']
 
 def afficherCube():
     """Affiche le cube."""
-    lines = [[' '] * 8 + [couleurs[c] for c in l] for l in cube[4]]
+    lines = [[' '] * 8 + [colors[c] for c in l] for l in cube[4]]
     lines.append([''])
 
     for i in range(3):
-        c = [couleurs[c] for c in cube[:4,i].ravel()]
+        c = [colors[c] for c in cube[:4,i].ravel()]
         c.insert(-3,' ')
         c.insert(6,' ')
         c.insert(3,' ')
         lines.append(c)
 
     lines.append([''])
-    lines += [[' '] * 8 + [couleurs[c] for c in l] for l in cube[5]]
+    lines += [[' '] * 8 + [colors[c] for c in l] for l in cube[5]]
     
     for l in lines:
         for c in l:
