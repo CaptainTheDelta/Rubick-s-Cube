@@ -10,12 +10,12 @@ from fct_cube import *
 
 #--------------------------------- Variables ----------------------------------
 
-CASE_SIZE = 50
+CASE_SIZE = 40
 ESPACE = CASE_SIZE // 5
-WIDTH = CASE_SIZE + ESPACE
+EMPTY_SPACE = CASE_SIZE // 2
 
 colors = ['O','B','R','G','Y','W']
-RGB = [(255,165,0),(0,0,255),(255,0,0),
+RGB = [(255,127,0),(0,0,255),(255,0,0),
             (0,255,0),(255,255,0),(255,255,255)]
 white = RGB[5]
 
@@ -56,6 +56,7 @@ def print_cube(display):
         display (pygame): Fenetre python.
     """
     global cube
+    width = CASE_SIZE + ESPACE
 
     def print_face(X,Y,face):
         """Affiche l'une des faces du cube dans la fenêtre à la position X,Y.
@@ -65,24 +66,25 @@ def print_cube(display):
             Y (int): Coordonnée entière.
             face (np.array): Tableau numpy 3x3 représentant une face.
         """
-        for x,line in enumerate(face):
-            for y,c in enumerate(line):
+        for y,line in enumerate(face):
+            for x,c in enumerate(line):
                 pygame.draw.rect(
                     display, 
                     RGB[c],
-                    case(X + x * WIDTH, Y + y * WIDTH)
+                    case(X + x * width, Y + y * width)
                 )
 
-    l = 3 * WIDTH
+    l = 2 * width + CASE_SIZE + EMPTY_SPACE 
 
     pos = [(0,l), (l,l), (2*l,l),(3*l,l),(2*l,0),(2*l,2*l)]
 
-    face0 = 0
+    # face0 = deepcopy(cube[0])
+    # face0[:,[0,2]] = np.roll(face0[:,[0,2]],1,axis=1)
 
-    print_face(*[p+ESPACE for p in pos[0]],np.rot90(cube[0],2))
+    # print_face(*[p+EMPTY_SPACE for p in pos[0]],face0)
 
-    for i in range(1,6):
-        print_face(*[p+ESPACE for p in pos[i]],cube[i])
+    for i in range(6):
+        print_face(*[p+EMPTY_SPACE for p in pos[i]],cube[i])
 
 
 def print_text(display,text):
@@ -103,18 +105,18 @@ def print_resolving(actions):
     fonction.
 
     Args:
-        cube (np.array): Cube mélangé.
         actions (list): Liste des fonctions à exécuter.
     """
     # Initialisation de la fenêtre pygame.
     
     pygame.init()
 
-    screen = pygame.display.set_mode((12*WIDTH+ESPACE,9*WIDTH+ESPACE))
+    width = 3 * CASE_SIZE + 2 * ESPACE + EMPTY_SPACE
+    screen = pygame.display.set_mode((4*width+EMPTY_SPACE,3*width+EMPTY_SPACE))
     pygame.display.set_caption("Rubick's Cube")
 
     clock = pygame.time.Clock()
-    fps = 30
+    fps = 60
 
     # Affiche la position initiale
     print_cube(screen)
@@ -129,11 +131,13 @@ def print_resolving(actions):
 
         try:
             txt = actions.pop(0)()
-            print_text(screen,"Hello World")
+            
+            screen.fill(0)
+            print_text(screen,txt)
             print_cube(screen)
+        
         except:
             pass
-
 
         pygame.display.update()
         clock.tick(fps)
