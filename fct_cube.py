@@ -35,7 +35,7 @@ def x():
     cube[3] = np.rot90(cube[3],-1)
 
 def xp():
-    cube[[0,4,2,5]] = np.roll(cube[[0,4,2,5]], -1, axis=0)
+    cube[[0,4,2,5]] = np.roll(cube[[0,4,2,5]], 1, axis=0)
 
     cube[1] = np.rot90(cube[1],-1)
     cube[3] = np.rot90(cube[3])
@@ -108,13 +108,13 @@ def S2():
 # Rotation des faces
 
 def R():
-    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], 1, axis=0)
-    cube[3] = np.rot90(cube[3],-1)
+    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], -1, axis=0)
+    cube[3] = np.rot90(cube[3])
 
 
 def Rp():
-    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], -1, axis=0)
-    cube[3] = np.rot90(cube[3])
+    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], 1, axis=0)
+    cube[3] = np.rot90(cube[3],-1)
 
 def R2():
     cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], 2, axis=0)
