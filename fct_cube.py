@@ -48,17 +48,15 @@ def x():
     #   4       2
     # 0123 -> 4153
     #   5       0
-    cube[[0,4,2,5]] = np.roll(cube[[0,4,2,5]], -1, axis=0)
+    cube[[0,4,2,5]] = cube[[4,2,5,0]]
 
+    cube[0] = np.rot90(cube[0],2)
     cube[1] = np.rot90(cube[1])
     cube[3] = np.rot90(cube[3],-1)
     return 'x'
 
 def xp():
-    cube[[0,4,2,5]] = np.roll(cube[[0,4,2,5]], 1, axis=0)
-
-    cube[1] = np.rot90(cube[1],-1)
-    cube[3] = np.rot90(cube[3])
+    x();x();x();
     return 'xp'
 
 
@@ -66,17 +64,15 @@ def y():
     #   4       4
     # 0123 -> 1230
     #   5       5
-    cube[:4] = np.roll(cube[:4], -1, axis=0)
+    cube[[0,1,2,3]] = cube[[1,2,3,0]]
+    cube[3,:,[0,2]] = cube[3,:,[2,0]]
 
     cube[5] = np.rot90(cube[5])
     cube[4] = np.rot90(cube[4],-1)
     return 'y'
 
 def yp():
-    np.roll(cube[:4],1,axis=0)
-
-    cube[5] = np.rot90(cube[5],-1)
-    cube[4] = np.rot90(cube[4])
+    y();y();y();
     return 'yp'
 
 
@@ -84,17 +80,19 @@ def z():
     #   4       1
     # 0123 -> 0524
     #   5       3
-    cube[[1,4,3,5]] = np.roll(cube[[1,4,3,5]], 1, axis=0)
+    yp();x();y()
+    # cube[[1,4,3,5]] = cube[[5,1,4,3]]
 
-    cube[0] = np.rot90(cube[0])
-    cube[2] = np.rot90(cube[2],-1)
+    # cube[0] = np.rot90(cube[0])
+    # cube[2] = np.rot90(cube[2],-1)
     return 'z'
 
 def zp():
-    cube[[1,4,3,5]] = np.roll(cube[[1,4,3,5]], -1, axis=0)
+    yp();xp();y()
+    #cube[[1,4,3,5]] = np.roll(cube[[1,4,3,5]], -1, axis=0)
 
-    cube[0] = np.rot90(cube[0],-1)
-    cube[2] = np.rot90(cube[2])
+    #cube[0] = np.rot90(cube[0],-1)
+    #cube[2] = np.rot90(cube[2])
     return 'zp'
 
 
@@ -102,27 +100,28 @@ def zp():
 
 def E():
     cube[:4,1] = np.roll(cube[:4,1], 1, axis=0)
+    cube[0,1] = cube[0,1][::-1]
     return 'E'
 
 def Ep():
-    cube[:4,1] = np.roll(cube[:4,1], -1, axis=0)
+    E();E();E();
     return 'Ep'
 
 def E2():
-    cube[:4,1] = np.roll(cube[:4,1], 2, axis=0)
+    E();E();
     return 'E2'
 
 
 def M():
-    cube[[0,4,2,5],:,1] = np.roll(cube[[0,4,2,5],:,1], 1, axis=0)
+    zp();E();z()
     return 'M'
 
 def Mp():
-    cube[[0,4,2,5],:,1] = np.roll(cube[[0,4,2,5],:,1], 1, axis=0)
+    zp();Ep();z()
     return 'Mp'
 
 def M2():
-    cube[[0,4,2,5],:,1] = np.roll(cube[[0,4,2,5],:,1], 2, axis=0)
+    zp();E2();z()
     return 'M2'
 
 
@@ -140,95 +139,83 @@ def S2():
 
 
 # Rotation des faces
-
-def R():
-    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], -1, axis=0)
-    cube[3] = np.rot90(cube[3])
-    return 'R'
-
-
-def Rp():
-    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], 1, axis=0)
-    cube[3] = np.rot90(cube[3],-1)
-    return 'Rp'
-
-def R2():
-    cube[[0,4,2,5],:,2] = np.roll(cube[[0,4,2,5],:,2], 2, axis=0)
-    cube[3] = np.rot90(cube[3],2)
-    return 'R2'
-
-
-def L():
-    cube[[0,4,2,5],:,0] = np.roll(cube[[0,4,2,5],:,0], -1, axis=0)
-    cube[1] = np.rot90(cube[1],-1)
-    return 'L'
-
-def Lp():
-    cube[[0,4,2,5],:,0] = np.roll(cube[[0,4,2,5],:,0], 1, axis=0)
-    cube[1] = np.rot90(cube[1])
-    return 'Lp'
-
-def L2():
-    cube[[0,4,2,5],:,0] = np.roll(cube[[0,4,2,5],:,0], 2, axis=0)
-    cube[1] = np.rot90(cube[1],2)
-    return 'L2'
-
-
 def U():
     cube[:4,0] = np.roll(cube[:4,0], -1, axis=0)
+    cube[3,:,[0,2]] = cube[3,:,[2,0]]
     cube[4] = np.rot90(cube[4],-1)
     return 'U'
 
 def Up():
-    cube[:4,0] = np.roll(cube[:4,0], 1, axis=0)
-    cube[4] = np.rot90(cube[4])
+    U();U();U();
     return 'Up'
 
 def U2():
-    cube[:4,0] = np.roll(cube[:4,0], 2, axis=0)
-    cube[4] = np.rot90(cube[4],2)
+    U();U();
     return 'U2'
 
 
+def R():
+    zp();U();z();
+    return 'R'
+
+def Rp():
+    zp();Up();z();
+    return 'Rp'
+
+def R2():
+    zp();U2();z();
+    return 'R2'
+
+
+def L():
+    z();U();zp();
+    return 'L'
+
+def Lp():
+    z();Up();zp();
+    return 'Lp'
+
+def L2():
+    z();U2();zp();
+    return 'L2'
+
+
 def D():
-    cube[:4,2] = np.roll(cube[:4,2], 1, axis=0)
-    cube[4] = np.rot90(cube[4],-1)
+    x();x();U();xp();xp();
     return 'D'
 
 def Dp():
-    cube[:4,2] = np.roll(cube[:4,2], -1, axis=0)
-    cube[4] = np.rot90(cube[4])
+    x();x();Up();xp();xp();
     return 'Dp'
 
 def D2():
-    cube[:4,2] = np.roll(cube[:4,2], 2, axis=0)
-    cube[4] = np.rot90(cube[4],2)
+    x();x();U2();xp();xp();
     return 'D2'
 
 
 def F():
-    y();L();yp()
+    x();U();xp();
     return 'F'
 
 def Fp():
-    y();Lp();yp()
+    x();Up();xp();
     return 'Fp'
 
 def F2():
-    y();L2();yp()
+    x();U2();xp();
     return 'F2'
 
 
 def B():
-    y();R();yp()
+    xp();U();x();
     return 'B'
 
 def Bp():
-    y();Rp();yp()
+    xp();U();x();
     return 'Bp'
 
 def B2():
-    y();R2();yp()
+    xp();U();x();
     return 'B2'
 
 
