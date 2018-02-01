@@ -5,9 +5,10 @@
 
 #----------------------------------- Import -----------------------------------
 
-import numpy as np
-from copy import deepcopy
 import os
+import numpy as np
+from random import randint,choice
+from copy import deepcopy
 
 #------------------------------------ Cube ------------------------------------
 
@@ -51,6 +52,7 @@ def x():
     cube[[0,4,2,5]] = cube[[4,2,5,0]]
 
     cube[0] = np.rot90(cube[0],2)
+    cube[5] = np.rot90(cube[5],2)
     cube[1] = np.rot90(cube[1])
     cube[3] = np.rot90(cube[3],-1)
     return 'x'
@@ -65,7 +67,6 @@ def y():
     # 0123 -> 1230
     #   5       5
     cube[[0,1,2,3]] = cube[[1,2,3,0]]
-    cube[3,:,[0,2]] = cube[3,:,[2,0]]
 
     cube[5] = np.rot90(cube[5])
     cube[4] = np.rot90(cube[4],-1)
@@ -141,8 +142,8 @@ def S2():
 # Rotation des faces
 def U():
     cube[:4,0] = np.roll(cube[:4,0], -1, axis=0)
-    cube[3,:,[0,2]] = cube[3,:,[2,0]]
     cube[4] = np.rot90(cube[4],-1)
+    cube[5] = np.rot90(cube[5],1)
     return 'U'
 
 def Up():
@@ -221,4 +222,31 @@ def B2():
 
 def shuffle():
     """Mélange le cube."""
-    pass
+    fcts = [x,xp, y,yp, z,zp,
+        E,Ep,E2, M,Mp,M2, S,Sp,S2, U,Up,U2,
+        R,Rp,R2, L,Lp,L2, D,Dp,D2, F,Fp,F2, B,Bp,B2]
+    n = len(fcts)
+
+    N = randint(50,100)
+
+    print("Nombre d'actions pour mélanger le cube :",N)
+
+    while N > 0
+        N -= 1
+        choice(fcts)()
+
+
+fct_inv = {
+    x:xp, xp:x,
+    y:yp, yp:y,
+    z:zp, zp:z,
+    E:Ep, Ep:E, E2:E2,
+    M:Mp, Mp:M, M2:M2,
+    S:Sp, Sp:S, S2:S2,
+    U:Up, Up:U, U2:U2,
+    R:Rp, Rp:R, R2:R2,
+    L:Lp, Lp:L, L2:L2,
+    D:Dp, Dp:D, D2:D2,
+    F:Fp, Fp:F, F2:F2,
+    B:Bp, Bp:B, B2:B2
+}
