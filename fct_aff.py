@@ -4,19 +4,21 @@
 
 import numpy as np
 import pygame
-from pygame.locals import *
 
 from fct_cube import *
 
 #--------------------------------- Variables ----------------------------------
 
 CASE_SIZE = 40
+# ESPACE : espace vide entre les carrés.
 ESPACE = CASE_SIZE // 5
+# EMPTY_ESPACE : espace vide entre les faces.
 EMPTY_SPACE = CASE_SIZE // 2
 
 colors = ['O','B','R','G','Y','W']
 RGB = [(255,127,0),(0,0,255),(255,0,0),
-            (0,255,0),(255,255,0),(255,255,255)]
+       (0,255,0),(255,255,0),(255,255,255),
+       (128,0,128)]
 white = RGB[5]
 
 #---------------------------------- Fonction ----------------------------------
@@ -116,28 +118,50 @@ def print_resolving(actions):
     pygame.display.set_caption("Rubick's Cube")
 
     clock = pygame.time.Clock()
-    fps = 60
+    fps = 10
 
     # Affiche la position initiale
     print_cube(screen)
 
+    N = len(actions)
+    anti_actions = [fct_inv[action] for action in actions]
+
     c = True
-    
+    i = 0
+    txt = {0:''}
+
     while c:
+        prv = 0
+        nxt = 0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 c = False
-
-
-        try:
-            txt = actions.pop(0)()
             
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                c = False
+
+            if event.key == pygame.K_RIGHT and i < N:
+                nxt = 1
+
+            if event.key == pygame.K_LEFT and i > 0:
+                prv = 1
+    
+        if nxt-prv:
+            t = ''
+
+            if nxt:
+                t = actions[i]()
+                txt[i+1] = t
+                i += 1
+            else:    
+                i -= 1
+                t = txt[i]
+                anti_actions[i]()
+                
             screen.fill(0)
-            print_text(screen,txt)
+            print_text(screen,t)
             print_cube(screen)
-        
-        except:
-            pass
 
         pygame.display.update()
         clock.tick(fps)
