@@ -11,7 +11,9 @@ Il possède pour le moment deux fichiers principaux :
 ![screen2](/images/screen2.png)
 
 ### Conventions
-
+<p align="center">
+  <img src="/images/notation.png">
+</p>
 ![conventions](/images/notation.png)
 ![conventions](/images/cube-rotation.png)
 ![conventions](/images/double-layers-turn.png)
