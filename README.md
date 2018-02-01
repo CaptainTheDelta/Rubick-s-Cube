@@ -16,8 +16,8 @@ Il possède pour le moment deux fichiers principaux :
 
 ### Conventions
 
-<img align="center" width="300" src="/images/notation.png">
-<img align="center" width="300" src="/images/cube-rotation.png">
-<img align="center" width="300" src="/images/double-layers-turn.png">
-<img align="center" width="300" src="/images/slide-moves.png">
-<img align="center" width="300" src="/images/standard-moves.png">
+<p align="center"><img width="300" src="/images/notation.png"></p>
+<p align="center"><img width="300" src="/images/cube-rotation.png"></p>
+<p align="center"><img width="300" src="/images/double-layers-turn.png"></p>
+<p align="center"><img width="300" src="/images/slide-moves.png"></p>
+<p align="center"><img width="300" src="/images/standard-moves.png"></p>
