@@ -101,13 +101,13 @@ def print_text(display,text):
     display.blit(label, (ESPACE,ESPACE))
 
 
-def print_resolving(actions):
+def print_resolving(actions=[]):
     """Affiche le cube à chaque étape de la résolution.
     Penser à remettre le cube à la situation initiale AVANT d'appeler cette 
     fonction.
 
     Args:
-        actions (list): Liste des fonctions à exécuter.
+        [actions (list)]: Liste des fonctions à exécuter.
     """
     # Initialisation de la fenêtre pygame.
     

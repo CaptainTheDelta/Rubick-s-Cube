@@ -8,3 +8,6 @@ from fct_aff import *
 #--------------------------------- Main Loop ----------------------------------
 
 print("Hello World")
+
+# shuffle()
+print_resolving()
